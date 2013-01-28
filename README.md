@@ -1,7 +1,7 @@
 WHMCS Custom Stripe Payment Gateway
 ============
 
-This is a free and open source Stripe Payment Gateway for WHMCS that supports one time and recurring payments without ever having a credit card number hit your WHMCS server.
+This is a free and open source Stripe Payment Gateway for WHMCS that supports one time and recurring payments without ever having a credit card number hit your WHMCS server. It's pretty neat!
 
 ## Overview
 
@@ -9,7 +9,7 @@ This gateway allows the [WHMCS](http://www.whmcs.com) billing system to use [Str
 
 ## Instructions For Use
 
-1. Download the [Stripe library for PHP](https://github.com/stripe/stripe-php) at this GitHub link. Create a new folder called `stripe` within the `/modules/gateways/` directory of your WHMCS installation and copy the contents of the `lib` folder (from your download) into that newly created folder.
+1. Download the [Stripe library for PHP](https://github.com/stripe/stripe-php). Create a new folder called `stripe` within the `/modules/gateways/` directory of your WHMCS installation and copy the contents of the `lib` folder (from your download) into that newly created folder.
 2. Copy the file in the repository's root folder called `stripe.php` and place it into the `/modules/gateways/` folder of your WHMCS installation.
 3. From within the `callback` folder of the repository, copy the other `stripe.php` file and place it into the `/modules/gateways/callback` folder of your WHMCS installation.
 4. Copy the `ccpay.php` file from the repository into the root directory of your WHMCS installation.
