@@ -47,3 +47,7 @@ You may now activate this new payment gateway from within WHMCS through the Setu
 ## Credits and Acknowledgements
 
 This module wouldn't have been possible to make without the help of [WHMCS'](http://www.whmcs.com) developer team as well as the staff at [Stripe](https://www.stripe.com) for their great product, well-documented PHP API, and quick support as well. All pieces of code, including the payment gateway template, are the property of their original owners.
+
+## Support Information
+
+I'm always looking to improve this code, so if you see something that can be changed or if you have an idea for a new feature or any other feedback, send me an email to `support *at* next gen web media dot com`, or send me a message on Twitter (`@grantdtech`), and I'll get right back to you. If you decide to use this module in your WHMCS install, send me a message to say hello (and let me know what you think too) and it'll make my day. Thanks!
