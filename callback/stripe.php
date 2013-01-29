@@ -12,6 +12,8 @@ $gatewaymodule = "stripe"; # Enter your gateway module name here replacing templ
 $gateway = getGatewayVariables($gatewaymodule);
 if (!$gateway["type"]) die("Module Not Activated"); # Checks gateway module is active before accepting callback
 
+$gatewaytestmode = $gateway['testmode'];
+
 if ($gatewaytestmode == "on") {
 	Stripe::setApiKey($gateway['private_test_key'];);
 } else {

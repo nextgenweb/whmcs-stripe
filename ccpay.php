@@ -11,6 +11,8 @@ require("modules/gateways/stripe/Stripe.php");
 
 $gateway = getGatewayVariables("stripe");
 
+$gatewaytestmode = $gateway['testmode'];
+
 if ($gatewaytestmode == "on") {
 	Stripe::setApiKey($gateway['private_test_key']);
 	$pubkey = $gateway['public_test_key'];

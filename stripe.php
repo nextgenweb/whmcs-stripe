@@ -73,6 +73,8 @@ function stripe_refund($params) {
 
 	require_once('stripe/Stripe.php');
 	
+	$gatewaytestmode = $params["testmode"];
+	
 	if ($gatewaytestmode == "on") {
 		Stripe::setApiKey($params['private_test_key']);
 	} else {
