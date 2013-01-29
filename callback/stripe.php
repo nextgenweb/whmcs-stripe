@@ -15,9 +15,9 @@ if (!$gateway["type"]) die("Module Not Activated"); # Checks gateway module is a
 $gatewaytestmode = $gateway['testmode'];
 
 if ($gatewaytestmode == "on") {
-	Stripe::setApiKey($gateway['private_test_key'];);
+	Stripe::setApiKey($gateway['private_test_key']);
 } else {
-	Stripe::setApiKey($gateway['private_live_key'];);
+	Stripe::setApiKey($gateway['private_live_key']);
 }
 
 $body = @file_get_contents('php://input');
