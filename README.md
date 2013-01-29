@@ -43,6 +43,7 @@ You may now activate this new payment gateway from within WHMCS through the Setu
 
 + This payment gateway relies on the way it saves an Invoice title and description to Stripe in order to properly function and credit invoices once they are paid. Because of this, you shouldn't attempt to modify the way invoices and plans are displayed in Stripe's web interface.
 + This payment gateway assumes that you are using the default WHMCS template based on Twitter's Bootstrap framework. If you are not, or if your theme uses a heavily or otherwise extremely modified version of Bootstrap, double-check to ensure that the Javscript this module uses will still work properly.
++ This gateway currently only works in English with United States Dollars as the currency.
 
 ## Credits and Acknowledgements
 

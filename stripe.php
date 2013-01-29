@@ -19,24 +19,6 @@ function stripe_link($params) {
 	$invoiceid = $params['invoiceid'];
 	$description = $params["description"];
     $amount = $params['amount']; # Format: ##.##
-    $currency = $params['currency']; # Currency Code
-
-	# Client Variables
-	$firstname = $params['clientdetails']['firstname'];
-	$lastname = $params['clientdetails']['lastname'];
-	$email = $params['clientdetails']['email'];
-	$address1 = $params['clientdetails']['address1'];
-	$address2 = $params['clientdetails']['address2'];
-	$city = $params['clientdetails']['city'];
-	$state = $params['clientdetails']['state'];
-	$postcode = $params['clientdetails']['postcode'];
-	$country = $params['clientdetails']['country'];
-	$phone = $params['clientdetails']['phonenumber'];
-
-	# System Variables
-	$companyname = $params['companyname'];
-	$systemurl = $params['systemurl'];
-	$currency = $params['currency'];
 
 	// Perform lookup to see if the invoice is for a recurring service
 	$result = mysql_query("SELECT relid, amount, description FROM tblinvoiceitems WHERE type='Hosting' AND invoiceid='" . $invoiceid . "'");
@@ -96,35 +78,11 @@ function stripe_refund($params) {
 	} else {
 		Stripe::setApiKey($params['private_live_key']);
 	}
-	
-    # Gateway Specific Variables
-	$gatewayusername = $params['username'];
-	$gatewaytestmode = $params['testmode'];
 
     # Invoice Variables
 	$transid = $params['transid'];
-	$amount = $params['amount'];
-    $currency = $params['currency'];
 
-    # Client Variables
-	$firstname = $params['clientdetails']['firstname'];
-	$lastname = $params['clientdetails']['lastname'];
-	$email = $params['clientdetails']['email'];
-	$address1 = $params['clientdetails']['address1'];
-	$address2 = $params['clientdetails']['address2'];
-	$city = $params['clientdetails']['city'];
-	$state = $params['clientdetails']['state'];
-	$postcode = $params['clientdetails']['postcode'];
-	$country = $params['clientdetails']['country'];
-	$phone = $params['clientdetails']['phonenumber'];
-
-	# Card Details
-	$cardtype = $params['cardtype'];
-	$cardnumber = $params['cardnum'];
-	$cardexpiry = $params['cardexp']; # Format: MMYY
-	$cardstart = $params['cardstart']; # Format: MMYY
-	$cardissuenum = $params['cardissuenum'];
-
+	# Perform Refund
 	try {
 		$ch = Stripe_Charge::retrieve($transid);
 		$ch->refund();
@@ -133,22 +91,6 @@ function stripe_refund($params) {
 		$response['error'] = $e->getMessage();
 		return array("status"=>"error","rawdata"=>$response['error']);
 	}
-	
-	# Perform Refund Here & Generate $results Array, eg:
-	$results = array();
-	$results["status"] = "success";
-    $results["transid"] = "12345";
-
-	# Return Results
-	if ($results["status"]=="success") {
-		return array("status"=>"success","transid"=>$results["transid"],"rawdata"=>$results);
-	} elseif ($gatewayresult=="declined") {
-        return array("status"=>"declined","rawdata"=>$results);
-    } else {
-		return array("status"=>"error","rawdata"=>$results);
-	}
-
-
 
 }
 
