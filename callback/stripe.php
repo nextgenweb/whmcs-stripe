@@ -7,7 +7,7 @@ include("../../../includes/gatewayfunctions.php");
 include("../../../includes/invoicefunctions.php");
 require_once("../stripe/Stripe.php");
 
-$gatewaymodule = "stripe"; # Enter your gateway module name here replacing template
+$gatewaymodule = "stripe";
 
 $gateway = getGatewayVariables($gatewaymodule);
 if (!$gateway["type"]) die("Module Not Activated"); # Checks gateway module is active before accepting callback
@@ -48,9 +48,9 @@ try {
 		$transid = $event->data->object->id;
 		
 		$amount_cents = $event->data->object->amount;
-		$amount = $amount / 100;
+		$amount = $amount_cents / 100;
 		
-		$fee_cents = $event->data->object->fee_details->amount;
+		$fee_cents = floatval($event->data->object->fee);
 		$fee = $fee_cents / 100;
 		
 		$paid = $event->data->object->paid;
@@ -66,7 +66,8 @@ $invoiceid = checkCbInvoiceID($invoiceid,$GATEWAY["name"]); # Checks invoice ID 
 checkCbTransID($transid); # Checks transaction number isn't already in the database and ends processing if it does
 
 if ($paid == true) {
-    # Successful
+
+    # Successful 
     addInvoicePayment($invoiceid,$transid,$amount,$fee,$gatewaymodule); # Apply Payment to Invoice: invoiceid, transactionid, amount paid, fees, modulename
 	logTransaction($GATEWAY["name"],$event,"Successful"); # Save to Gateway Log: name, data array, status
 } else {
